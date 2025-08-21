@@ -1,10 +1,12 @@
 package elements;
 
+import forms.PracticeForm;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -20,6 +22,7 @@ class UiTest extends BaseTest {
     private final String BUTTONS_URL = "https://demoqa.com/buttons";
     private final String DOWNLOAD_UPLOAD_URL = "https://demoqa.com/upload-download";
     private final String DYNAMIC_PROPERTIES_URL = "https://demoqa.com/dynamic-properties";
+    private final String PRACTICE_FORM_URL = "https://demoqa.com/automation-practice-form";
 
     @Test
     @DisplayName("Проверка валидности email адреса на странице ввода текста")
@@ -127,5 +130,19 @@ class UiTest extends BaseTest {
         String expectedStr = "Visible After 5 Seconds";
         Assertions.assertEquals(expectedStr, dynamicProperties.checkDisplay());
         Assertions.assertTrue(dynamicProperties.getColorInfo().contains("mt-4 text-danger btn btn-primary"));
+    }
+
+    @Test
+    @DisplayName("Тест заполнения формы")
+    public void fillFormTest(){
+        PracticeForm practiceForm = new PracticeForm(PRACTICE_FORM_URL);
+        List<String> subjects = new ArrayList<>();
+        subjects.add("Math");
+        subjects.add("Economics");
+        subjects.add("English");
+        subjects.add("Physics");
+
+        practiceForm.fillForm("Male", "fs;hfldhglagh", subjects);
+        int i = 0;
     }
 }
